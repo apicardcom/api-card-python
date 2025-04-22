@@ -1,74 +1,119 @@
-# 🐍 API-Card Python Examples
+# 🐍 API-Card Python SDK
 
-This repo contains simple, ready-to-run Python examples using `requests` to interact with [API-Card.com](https://api-card.com).  
-Perfect for developers building automations, bots, or fintech flows around virtual card issuance and payments.
+[![License](https://img.shields.io/github/license/apicardcom/api-card-python?style=flat-square)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg?style=flat-square)](https://www.python.org/)
+[![Postman Docs](https://img.shields.io/badge/docs-Postman-orange?logo=postman&style=flat-square)](https://documenter.getpostman.com/view/38099920/2sAXjNYWSK)
+[![Telegram](https://img.shields.io/badge/support-Telegram-blue?logo=telegram&style=flat-square)](https://t.me/api_card_support)
 
-📄 Official Docs: [Postman](https://documenter.getpostman.com/view/38099920/2sAXjNYWSK)  
-💬 Telegram Support: [@api_card_support](https://t.me/api_card_support)
+A simple Python wrapper around the [api-card.com](https://api-card.com) API using `requests`.  
+Useful for issuing virtual cards, querying transactions, and managing your account securely via code.
 
 ---
 
 ## 🚀 Quickstart
 
 ```bash
-pip install requests
+git clone https://github.com/apicardcom/api-card-python.git
+cd api-card-python
+pip install -r requirements.txt
 python examples/auth.py
+```
+
+> 🔐 Set your API key in each script using:  
+> `Authorization: Bearer YOUR_API_KEY`
+
+---
+
+## 📦 What's Inside?
+
+Production-ready examples using the official base URL:  
+`https://api-card.com/api/v1`
+
+- ✅ Clean `requests` usage
+- 🧪 Test mode support
+- 💬 Human-readable responses
+- 🛡️ Idempotency key usage for safe POST/PUT
+
+---
+
+## 🧩 Examples by Endpoint
+
+### 🔐 Authentication
+| File       | Method | Description         |
+|------------|--------|---------------------|
+| `auth.py`  | GET    | Test API key        |
+
+### 💼 Account API
+| File             | Method | Description         |
+|------------------|--------|---------------------|
+| `get_balance.py` | GET    | Get account balance |
+| `get_bins.py`    | GET    | Get BINs list       |
+
+### 💳 Card Management
+| File                        | Method | Description                   |
+|-----------------------------|--------|-------------------------------|
+| `list_cards.py`             | GET    | List all cards                |
+| `get_card.py`               | GET    | Get specific card             |
+| `generate_card.py`          | POST   | Create new card               |
+| `generate_card_address.py`  | POST   | Create card + auto address    |
+| `update_card_address.py`    | PUT    | Update card name/address      |
+| `update_card_limit.py`      | PUT    | Update card spending limit    |
+| `update_card_status.py`     | PUT    | Activate / deactivate card    |
+| `update_card_closing.py`    | PUT    | Set card closing date         |
+
+### 📊 Transactions API
+| File                        | Method | Description                      |
+|-----------------------------|--------|----------------------------------|
+| `list_transactions.py`      | GET    | All account transactions         |
+| `list_card_transactions.py` | GET    | Specific card transactions       |
+| `list_internal_txns.py`     | GET    | Internal balance movements       |
+
+---
+
+## 💡 Code Style
+
+Each script includes:
+- `requests` with proper headers
+- Base URL and endpoint clarity
+- `Authorization: Bearer YOUR_API_KEY`
+- Example JSON responses in comments
+- Clean error handling (minimal but real)
+
+---
+
+## 🧰 Requirements
+
+- Python 3.7+
+- `requests` (standard lib)
+- `uuid`, `json` (for idempotency)
+
+Install with:
+
+```bash
+pip install requests
 ```
 
 ---
 
-## 🧩 Endpoints Covered
+## 📄 API Reference
 
-### 🔐 Authentication API
-| File                  | Method | Description             |
-|-----------------------|--------|-------------------------|
-| `auth.py`             | GET    | Test Authentication     |
-
-### 💼 Account API
-| File                  | Method | Description             |
-|-----------------------|--------|-------------------------|
-| `get_balance.py`      | GET    | Get Account Balance     |
-| `get_bins.py`         | GET    | Get BINS                |
-
-### 💳 Cards API
-| File                          | Method | Description                     |
-|-------------------------------|--------|---------------------------------|
-| `list_cards.py`               | GET    | List Cards                      |
-| `get_card.py`                 | GET    | Get Card Details                |
-| `generate_card.py`           | POST   | Generate New Card               |
-| `generate_card_address.py`   | POST   | Generate Card + Address         |
-| `update_card_address.py`     | PUT    | Change Card Address and Name    |
-| `update_card_limit.py`       | PUT    | Change Card Limit               |
-| `update_card_status.py`      | PUT    | Change Card Status              |
-| `update_card_closing.py`     | PUT    | Change Card Closing Date        |
-
-### 📊 Transactions API
-| File                          | Method | Description                     |
-|-------------------------------|--------|---------------------------------|
-| `list_transactions.py`        | GET    | List All Transactions           |
-| `list_card_transactions.py`   | GET    | List Card-Specific Transactions |
-| `list_internal_txns.py`       | GET    | List Internal Transactions      |
+- 🔗 [Full Postman Docs](https://documenter.getpostman.com/view/38099920/2sAXjNYWSK)
+- 📘 Base URL: `https://api-card.com/api/v1`
 
 ---
 
-## 💡 Usage Format
+## 🤝 Contribute
 
-Each file contains:
-- `requests`-based example
-- Real endpoint URL
-- Authorization format (`Bearer YOUR_API_KEY`)
-- Clean, ready-to-copy usage
+Have suggestions or new use cases?  
+Open a PR, raise an issue, or fork and star ⭐ the repo!
 
 ---
 
-## ⭐ Contribute
+## 👥 Community
 
-Want to help improve examples or build something cool on top?  
-PRs welcome! Or just star the repo to support the project.
+- [Telegram Support](https://t.me/api_card_support)
+- [Website](https://api-card.com)
 
 ---
 
-## 👥 Connect with Us
-
-- API Support: [@api_card_support](https://t.me/api_card_support)
-- Website: [api-card.com](https://api-card.com)
+© API-Card.com — All trademarks belong to their respective owners.
