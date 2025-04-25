@@ -2,6 +2,7 @@
 import os
 import sys
 import requests
+import uuid  # Add at the top if not already
 from dotenv import load_dotenv
 
 # Add parent directory to path to find .env in root folder
@@ -11,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv()
 
 BASE_URL = "https://api-card.com/api/v1"
-ENDPOINT = "/cards/{card_id}/address"
+ENDPOINT = "/cards/{card_id}"
 
 def update_card_address(card_id, address_data, api_key=None):
     # Use provided API key or get from environment
@@ -23,7 +24,8 @@ def update_card_address(card_id, address_data, api_key=None):
     url = f"{BASE_URL}{ENDPOINT.format(card_id=card_id)}"
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Idempotency-Key": str(uuid.uuid4())
     }
 
     response = requests.put(url, headers=headers, json=address_data)
@@ -33,10 +35,26 @@ def update_card_address(card_id, address_data, api_key=None):
 # For direct testing
 if __name__ == "__main__":
     try:
-        # Replace with an actual card ID and address data for testing
-        card_id = "example_card_id"
-        address_data = {"address1": "123 New St", "city": "New City", "state": "CA", "postal_code": "12345"}
+        # Replace with an actual card ID
+        card_id = "example_card_id"  # <- Replace this with a real card ID
+        
+        address_data = {
+            "Type": "nameaddress",
+            "FirstName": "John",
+            "LastName": "Doe",
+            "Address1": "123 Main St",
+            "City": "Springfield",
+            "State": "IL",
+            "Country": "US",
+            "Zip": "62704",
+            "PhoneNumber": "2175551212",
+            "Email": "johndoe@example.com"
+        }
+
+        print(f"Updating address for card ID {card_id}...")
         result = update_card_address(card_id, address_data)
-        print(f"Card address updated: {result}")
+        print("Card address updated successfully!")
+        print(result)
+
     except Exception as e:
         print(f"Error: {e}")

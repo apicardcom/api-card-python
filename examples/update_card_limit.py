@@ -2,6 +2,7 @@
 import os
 import sys
 import requests
+import uuid
 from dotenv import load_dotenv
 
 # Add parent directory to path to find .env in root folder
@@ -11,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv()
 
 BASE_URL = "https://api-card.com/api/v1"
-ENDPOINT = "/cards/{card_id}/limit"
+ENDPOINT = "/cards/{card_id}"
 
 def update_card_limit(card_id, limit_data, api_key=None):
     # Use provided API key or get from environment
@@ -23,20 +24,29 @@ def update_card_limit(card_id, limit_data, api_key=None):
     url = f"{BASE_URL}{ENDPOINT.format(card_id=card_id)}"
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Idempotency-Key": str(uuid.uuid4())
     }
 
     response = requests.put(url, headers=headers, json=limit_data)
+    print("Response content:", response.text)  # Debug print
     response.raise_for_status()
     return response.json()
 
 # For direct testing
 if __name__ == "__main__":
     try:
-        # Replace with an actual card ID and limit data for testing
-        card_id = "example_card_id"
-        limit_data = {"limit": 5000}
+        card_id = "example_card_id"  # Replace with real card ID
+
+        limit_data = {
+            "Type": "limit",
+            "Limit": 100.00  # Must be a float value
+        }
+
+        print(f"Updating limit for card {card_id} to {limit_data['Limit']}...")
         result = update_card_limit(card_id, limit_data)
-        print(f"Card limit updated: {result}")
+        print("Card limit updated successfully:")
+        print(result)
+
     except Exception as e:
         print(f"Error: {e}")

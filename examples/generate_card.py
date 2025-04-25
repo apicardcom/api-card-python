@@ -4,6 +4,7 @@ import sys
 import requests
 import uuid
 from dotenv import load_dotenv
+from datetime import datetime, timedelta
 
 # Add parent directory to path to find .env in root folder
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -40,16 +41,22 @@ if __name__ == "__main__":
     try:
         # More complete example card data for testing
         example_card_data = {
-            "program_id": 1,  # Use an appropriate program ID from your account
-            "name": "Test Card via Python SDK",
-            "limit": 1000,
-            "card_type": "VIRTUAL",
-            "status": "ACTIVE", 
-            "is_test": True,
-            "metadata": {
-                "created_by": "Python SDK Test",
-                "test_run": True
-            }
+            "ProgramID": 38,
+            "Limit": 1,
+            "AddressGenerate": False,
+            "FirstName": "test",
+            "LastName": "test",
+            "Address1": "Main str. 1",
+            "City": "New York",
+            "State": "NY",
+            "Zip": "123456",
+            "CountryIso": "US",
+            "ExpMonth": "11",
+            "ExpYear": "2026",
+            "PhoneNumber": "5105551212",
+            "Email": "test@test.com",
+            "IsTest": True,
+            "ClosingDate": (datetime.utcnow() + timedelta(days=30)).isoformat() + "Z"
         }
         
         print("Generating test card...")

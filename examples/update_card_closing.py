@@ -2,6 +2,8 @@
 import os
 import sys
 import requests
+import uuid
+import time
 from dotenv import load_dotenv
 
 # Add parent directory to path to find .env in root folder
@@ -11,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv()
 
 BASE_URL = "https://api-card.com/api/v1"
-ENDPOINT = "/cards/{card_id}/closing-date"
+ENDPOINT = "/cards/{card_id}"
 
 def update_card_closing(card_id, closing_data, api_key=None):
     # Use provided API key or get from environment
@@ -23,20 +25,33 @@ def update_card_closing(card_id, closing_data, api_key=None):
     url = f"{BASE_URL}{ENDPOINT.format(card_id=card_id)}"
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Idempotency-Key": str(uuid.uuid4())
     }
 
     response = requests.put(url, headers=headers, json=closing_data)
+    print("Response content:", response.text)  # For debugging
     response.raise_for_status()
     return response.json()
 
 # For direct testing
 if __name__ == "__main__":
     try:
-        # Replace with an actual card ID and closing data for testing
-        card_id = "example_card_id"
-        closing_data = {"closing_date": "2023-12-31"}
+        card_id = "example_card_id"  # Replace with real card ID
+
+        # Generate UNIX timestamp for NOW + 30 days
+        closing_timestamp = int(time.time()) + 30 * 24 * 60 * 60
+
+        closing_data = {
+            "Type": "extend",
+            "ClosingDate": str(closing_timestamp)
+        }
+
+        print(f"Updating closing date for card {card_id} to {closing_timestamp}...")
         result = update_card_closing(card_id, closing_data)
-        print(f"Card closing date updated: {result}")
+        print("Card closing date updated successfully:")
+        print(result)
+
     except Exception as e:
         print(f"Error: {e}")
