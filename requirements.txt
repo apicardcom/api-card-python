@@ -1,0 +1,6 @@
+# Core dependencies
+requests>=2.25.0
+python-dotenv>=0.15.0
+
+# Optional dependencies for improved terminal UI
+colorama>=0.4.4  # For Windows color support 

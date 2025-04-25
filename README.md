@@ -16,11 +16,45 @@ Useful for issuing virtual cards, querying transactions, and managing your accou
 git clone https://github.com/apicardcom/api-card-python.git
 cd api-card-python
 pip install -r requirements.txt
-python examples/auth.py
+
+# Set up your API key in .env file
+echo "API_CARD_API_KEY=your_api_key_here" > .env
+
+# Run the basic test script
+python test-basic.py
 ```
 
-> 🔐 Set your API key in each script using:  
-> `Authorization: Bearer YOUR_API_KEY`
+> 🔐 API keys are loaded from a `.env` file in the project root or can be provided directly to each function.
+
+Example test output:
+```
+API-CARD PYTHON SDK - BASIC TEST
+
+1. Testing Authentication...
+✓ Authentication successful!
+
+2. Getting Account Balance...
+✓ Success!
+   Balance USD: $404.59
+   Total Replenishment USD: $16261.25
+   Total Spend USD: $3816
+   Balance Cards: 14
+   Total Cards: 57
+   Active Cards: 3
+   Active Cards Available Balance USD: $45.07
+   Is New Cards Available: True
+   Top Up Required Amount: $0
+
+3. Checking Available Bins...
+✓ Found 36 bin(s)
+✓ You have access to 2 bin(s)
+   Bin 1: MasterCard 537100 (Accessible)
+   Bin 2: MasterCard 52489792 (Accessible)
+
+Test completed in 3.00 seconds
+
+✨ You're all set to use the API-Card Python SDK!
+```
 
 ---
 
@@ -33,6 +67,7 @@ Production-ready examples using the official base URL:
 - 🧪 Test mode support
 - 💬 Human-readable responses
 - 🛡️ Idempotency key usage for safe POST/PUT
+- 🔄 Environment variable support (.env)
 
 ---
 
@@ -70,12 +105,33 @@ Production-ready examples using the official base URL:
 
 ---
 
+## 🧪 Testing
+
+To quickly test your API setup, run:
+
+```bash
+python test-basic.py
+```
+
+This script will:
+1. Verify your API key authentication
+2. Display your current account balance details
+3. Show available BINs and which ones you have access to
+
+All example scripts can also be run individually:
+
+```bash
+python examples/get_balance.py
+```
+
+---
+
 ## 💡 Code Style
 
 Each script includes:
 - `requests` with proper headers
 - Base URL and endpoint clarity
-- `Authorization: Bearer YOUR_API_KEY`
+- API key loaded from environment or passed as parameter
 - Example JSON responses in comments
 - Clean error handling (minimal but real)
 
@@ -84,13 +140,13 @@ Each script includes:
 ## 🧰 Requirements
 
 - Python 3.7+
-- `requests` (standard lib)
-- `uuid`, `json` (for idempotency)
+- `requests`
+- `python-dotenv` (for reading .env files)
 
 Install with:
 
 ```bash
-pip install requests
+pip install -r requirements.txt
 ```
 
 ---

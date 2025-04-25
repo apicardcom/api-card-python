@@ -1,0 +1,2771 @@
+{
+	"info": {
+		"_postman_id": "04618719-d879-4567-b48a-f3194fbc848c",
+		"name": "API Documentation api-card.com",
+		"description": "Welcome page of the **`api-card.com`** API!  \nManage virtual cards and transactions securely.\n\n  \n**Translations available:**\n\n[English](https://documenter.getpostman.com/view/38099920/2sAXjNYWSK) (current) / [Russian](https://documenter.getpostman.com/view/38099920/2sAXqm9jQL)\n\n## 🌐 [Go to api-card.com](https://api-card.com/)\n\n## 🚀 **Overview**\n\n**Base URL:**  \n`https://api-card.com/api/v1`\n\n## 🔐 **Authentication**\n\n### **Test Authentication**\n\n`GET /test-auth`  \nVerify your API key.\n\n---\n\n## 💳 **Account Management**\n\n### **Get Account Balance**\n\n`GET /account/balance`  \nRetrieve the account balance.\n\n### **Get BINs**\n\n`GET /account/bins`  \nList the account's BINs.\n\n---\n\n## 🃏 **Card Management**\n\n### **List Cards**\n\n`GET /cards`  \nRetrieve all cards.\n\n### **Get Card**\n\n`GET /cards/{card_id}`  \nGet card details.\n\n### **Generate Card**\n\n`POST /cards`  \nCreate a new card.\n\n### **Change Card Status**\n\n`PUT /cards/{card_id}`  \nUpdate card status.\n\n---\n\n## 💰 **Transaction Management**\n\n### **List Transactions**\n\n`GET /transactions`  \nList all transactions.\n\n### **List Card Transactions**\n\n`GET /transactions/cards`  \nGet card transactions.\n\n### **List Internal Transactions**\n\n`GET /transactions/internal`  \nGet internal transactions.\n\n---\n\n## 📘 **Get Started**\n\nExplore the complete [API documentation](https://documenter.getpostman.com/view/38099920/2sAXjNYWSK).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38099920",
+		"_collection_link": "https://www.postman.com/api-cardcom-team/api-card-com-api-public/collection/czs9mxo/api-documentation-api-card-com?action=share&source=collection_link&creator=38099920"
+	},
+	"item": [
+		{
+			"name": "📂 Authentication API",
+			"item": [
+				{
+					"name": "Test Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('Status');",
+									"    pm.expect(responseData).to.have.property('Good');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Status).to.exist.and.to.be.a('number').and.to.satisfy((num) => num >= 0, \"Status should be a non-negative integer\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Good is a boolean value\", function () {",
+									"  const responseData = pm.response.json();",
+									"  pm.expect(responseData.Good).to.be.a('boolean');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/test-auth",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"test-auth"
+							]
+						},
+						"description": "This request verifies your API key and ensures that it is valid.\n\nTo use this request:  \nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nA successful response indicates that your API key is correct and active."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/test-auth",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"test-auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/test-auth",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"test-auth"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints for verifying your API key and testing authentication.\n\n### 🔑 Key Features:\n\n- **🔐 Test Authentication**: Check your API key and ensure it's valid.  \n    **Endpoint**: `GET /test-auth`"
+		},
+		{
+			"name": "📂 Account API",
+			"item": [
+				{
+					"name": "Get Account Balance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('balance_usd');",
+									"    pm.expect(responseData).to.have.property('total_replenishment_usd');",
+									"    pm.expect(responseData).to.have.property('total_spend_usd');",
+									"    pm.expect(responseData).to.have.property('balance_cards');",
+									"    pm.expect(responseData).to.have.property('total_cards');",
+									"    pm.expect(responseData).to.have.property('active_cards');",
+									"    pm.expect(responseData).to.have.property('active_cards_available_balance_usd');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'Result' object is present in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('Result');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Good field is a boolean value\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Good).to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"All financial details are non-negative integers\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.Result.balance_usd).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.total_replenishment_usd).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.total_spend_usd).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.balance_cards).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.total_cards).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.active_cards).to.be.a('number').and.to.be.at.least(0);",
+									"  pm.expect(responseData.Result.active_cards_available_balance_usd).to.be.a('number').and.to.be.at.least(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/account/balance",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"balance"
+							]
+						},
+						"description": "This request retrieves the current balance of your account, including details such as total balance, total replenishment amount, total spend, and available balance on active cards.\n\nTo use this request:  \nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nThe response will return your account's financial details."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/account/balance",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"account",
+										"balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"balance_usd\": 0,\n        \"total_replenishment_usd\": 0,\n        \"total_spend_usd\": 0,\n        \"balance_cards\": 0,\n        \"total_cards\": 1,\n        \"active_cards\": 0,\n        \"active_cards_available_balance_usd\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get BINS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Result object should exist and be an array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Verify boolean values for specific fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.is_3ds).to.be.a('boolean');",
+									"    pm.expect(responseData.is_expiration).to.be.a('boolean');",
+									"    pm.expect(responseData.is_phone_number).to.be.a('boolean');",
+									"    pm.expect(responseData.is_email).to.be.a('boolean');",
+									"    pm.expect(responseData.has_access).to.be.a('boolean');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Network field should be a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.network).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Network field should be a non-empty string\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/account/bins",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"bins"
+							]
+						},
+						"description": "This request retrieves a list of BINs (Bank Identification Numbers) associated with your account. The response includes details such as whether 3DS is supported, whether an expiration date is required, and the network (e.g., Visa).\n\nTo use this request:  \nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nThe response will provide details of the BINs associated with your account.\n\nIf more than 90% transactions are successful at some merchant such as Facebook, Google or TikTok— we put its name in the \"recently_approved\" automatically."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/account/bins",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"account",
+										"bins"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": [\n        {\n            \"id\": 105,\n            \"bin\": 54373441,\n            \"is_3ds\": false,\n            \"is_expiration\": true,\n            \"is_phone_number\": false,\n            \"max_exp_months\": 36,\n            \"network\": \"MasterCard\",\n            \"recently_approved\": null,\n            \"is_email\": false,\n            \"int_tx_fee_percentage\": 0.03,\n            \"has_access\": false\n        },\n        {\n            \"id\": 139,\n            \"bin\": 428852,\n            \"is_3ds\": false,\n            \"is_expiration\": true,\n            \"is_phone_number\": false,\n            \"max_exp_months\": 36,\n            \"network\": \"Visa\",\n            \"recently_approved\": \"FACEBOOK,GOOGLE,TIKTOK,TABOOLA,OUTBRAIN\",\n            \"is_email\": false,\n            \"int_tx_fee_percentage\": 0.03,\n            \"has_access\": true\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints related to account management. You can retrieve information about your account balance and the BINs associated with your account.\n\n### 🔑 Key Features:\n\n- **💰 Retrieve Account Balance**: Check your current account balance, including total replenishments and expenses.  \n    **Endpoint**: `GET /account/balance`\n    \n- **🔢 Retrieve BINs**: Get a list of BINs associated with your account.  \n    **Endpoint**: `GET /account/bins`"
+		},
+		{
+			"name": "📂 Cards API",
+			"item": [
+				{
+					"name": "List Cards",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    ",
+									"    const requiredFields = [",
+									"        \"id\", \"cc_num\", \"cvx2\", \"name\", \"limit\", \"program_id\", \"bin\", ",
+									"        \"last4\", \"balance\", \"address\", \"is_active\", \"currency\", \"exp_month\", ",
+									"        \"exp_year\", \"spend\", \"phone_number\", \"created_at\", \"email\", ",
+									"        \"closed_at\", \"is_test\"",
+									"    ];",
+									"    ",
+									"    responseData.Result.forEach(function(card) {",
+									"        requiredFields.forEach(function(field) {",
+									"            pm.expect(card).to.have.property(field);",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Result array is present and contains at least one element\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('array').that.is.not.empty;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Id in the Result array is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    ",
+									"    responseData.Result.forEach(function(card) {",
+									"        pm.expect(card.id).to.be.a('number').and.to.be.at.least(0);",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the presence of 'created_at' in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    ",
+									"    responseData.Result.forEach(function(card) {",
+									"        pm.expect(card).to.have.property('created_at');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						},
+						"description": "## Overview\n\nThis request retrieves a list of all virtual cards associated with your account. It supports pagination, sorting, and searching by various properties such as card number, name, address, and more.\n\n## How to Use\n\nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nThe response will return a list of all cards associated with your account.\n\n## Sorting and Pagination\n\nThe API supports sorting and pagination for endpoints that return arrays of resources. The sorting mechanism places the resources in order; the pagination mechanism then returns a specific range of those ordered resources. You control sorting and pagination through URL query parameters.\n\nA `GET` request to the `/cards` endpoint returns an array of cards. By default, the sorting mechanism places the most recently entered cards at the top of the sort order (`sort_by=-created_at`), and the pagination mechanism then returns the first five cards (`count=5&start_index=0`). The following URL shows this default setting in an explicit form:  \n`/cards?sort_by=-created_at&start_index=0&count=5`\n\nThe next five cards in the sort order could then be returned with this URL (start_index is now set to 5):  \n`/cards?sort_by=-created_at&start_index=5&count=5`\n\n## Query Parameters\n\n| Parameter | Description | Values | Default Value |\n| --- | --- | --- | --- |\n| `search` | Specifies the value by which the search is performed. | Any string | None |\n| `sort_by` | Field on which to sort. Use any field in the resource model. Prefix the field name with a hyphen (-) to sort in descending order. Omit the hyphen to sort in ascending order. | Any field in the resource model | The first field in the resource model |\n| `start_index` | Specifies the sort order index from which to begin returning data. | Any positive integer | 0 (the first row) |\n| `count` | Specifies the number of resources to return. | Any positive integer | 5 |\n\n## Response Fields\n\n| Name | Type | Description |\n| --- | --- | --- |\n| `per_page` | int | The number of resources returned. |\n| `total` | int | The number of all available resources. |\n| `current_page` | int | The number of the current page. |\n| `total_pages` | int | The number of all available pages. |\n| `from` | int | The sort order index of the first resource in the returned array. |\n| `to` | int | The sort order index of the last resource in the returned array. Returns `null` if no resources are returned. |\n\n## Sample Response Body\n\nAll response fields are located in the `MetaData` object.\n\n``` json\n{\n  \"Status\": 0,\n  \"Good\": true,\n  \"Result\": [\n    ...\n  ],\n  \"MetaData\": {\n    \"current_page\": 1,\n    \"from\": 1,\n    \"per_page\": 15,\n    \"to\": 15,\n    \"total\": 36,\n    \"total_pages\": 3\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": [\n        {\n            \"id\": 0,\n            \"cc_num\": 4532209188802,\n            \"cvx2\": \"409\",\n            \"name\": \"test test\",\n            \"limit\": 1,\n            \"program_id\": 139,\n            \"bin\": 402400,\n            \"last4\": 3358,\n            \"balance\": 1,\n            \"address\": \"Main str. 1, New York, NY, 123456\",\n            \"is_active\": false,\n            \"currency\": \"USD\",\n            \"exp_month\": 11,\n            \"exp_year\": 2022,\n            \"spend\": 0,\n            \"phone_number\": \"5105551212\",\n            \"created_at\": \"2024-09-04T02:23:41Z\",\n            \"email\": \"test@test.com\",\n            \"closed_at\": \"1970-01-01T00:33:44Z\",\n            \"is_test\": true\n        }\n    ],\n    \"MetaData\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"per_page\": 15,\n        \"to\": 1,\n        \"total\": 1,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response content type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the Result object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('object');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Ensure the necessary fields are present in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.id).to.exist;",
+									"    pm.expect(responseData.cc_num).to.exist;",
+									"    pm.expect(responseData.name).to.exist;",
+									"    pm.expect(responseData.limit).to.exist;",
+									"    pm.expect(responseData.program_id).to.exist;",
+									"    pm.expect(responseData.bin).to.exist;",
+									"    pm.expect(responseData.last4).to.exist;",
+									"    pm.expect(responseData.balance).to.exist;",
+									"    pm.expect(responseData.address).to.exist;",
+									"    pm.expect(responseData.is_active).to.exist;",
+									"    pm.expect(responseData.currency).to.exist;",
+									"    pm.expect(responseData.exp_month).to.exist;",
+									"    pm.expect(responseData.exp_year).to.exist;",
+									"    pm.expect(responseData.spend).to.exist;",
+									"    pm.expect(responseData.created_at).to.exist;",
+									"    pm.expect(responseData.email).to.exist;",
+									"    pm.expect(responseData.closed_at).to.exist;",
+									"    pm.expect(responseData.is_test).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Response body should be a valid JSON object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"});",
+									"",
+									"pm.test(\"Phone number should be null or in a valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    if (responseData.phone_number !== null) {",
+									"        pm.expect(responseData.phone_number).to.match(/^\\+?\\d{0,15}$/);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"description": "This ensures that each request is authenticated and authorized to access your account data.",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}"
+							]
+						},
+						"description": "This request retrieves detailed information about a specific virtual card by its ID.\n\nTo use this request:\n\n- Replace `{{card_id}}` in the URL with the actual card ID you want to retrieve.\n    \n- **For example:** to get details for the card with ID `0` (test card), set the URL to `https://api-card.com/api/v1/cards/0`.\n    \n- Send the request, and it will return the details of the our test card.\n    \n\nMake sure your `api_key` is included in the Authorization header.\n\n## Query Parameters\n\n| Parameter          | Type        | Description                                                                                                      |\n|--------------------|-------------|------------------------------------------------------------------------------------------------------------------|\n| `per_page` (OPTIONAL)      | `int`       | Number of records per page                                                                                       |\n| `search` (OPTIONAL)        | `string`    | Search by properties (`'cc_num'`, `'name'`, `'address'`, `'phone_number'`, `'email'`). See examples below        |\n| `created_at_from` (OPTIONAL)| `datetime`  | Starting transaction date time. See examples below                                                               |\n| `created_at_to` (OPTIONAL)  | `datetime`  | Ending transaction date time. See examples below                                                                 |\n| `start_index` (OPTIONAL)    | `int`       | Start index of transaction offset. See examples below                                                            |\n| `count` (OPTIONAL)          | `int`       | Get counted amount of records. See examples below                                                                |\n\n"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"description": "This ensures that each request is authenticated and authorized to access your account data.",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"id\": 0,\n        \"cc_num\": 4532209188802,\n        \"cvx2\": \"123\",\n        \"name\": \"test test\",\n        \"limit\": 1,\n        \"program_id\": 139,\n        \"bin\": 402400,\n        \"last4\": 3358,\n        \"balance\": 1,\n        \"address\": \"Main str. 1, New York, NY, 123456\",\n        \"is_active\": false,\n        \"currency\": \"USD\",\n        \"exp_month\": 11,\n        \"exp_year\": 2022,\n        \"spend\": 0,\n        \"phone_number\": \"5105551212\",\n        \"created_at\": \"2024-09-04T02:23:41Z\",\n        \"email\": \"test@test.com\",\n        \"closed_at\": \"1970-01-01T00:33:44Z\",\n        \"is_test\": true\n    }\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"description": "This ensures that each request is authenticated and authorized to access your account data.",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 1,\n    \"Good\": false,\n    \"ErrorMessage\": \"Card not found or no permission\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Card",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ProgramID\": 139,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": false, // option #1\r\n  \"FirstName\": \"test\",\r\n  \"LastName\": \"test\",\r\n  \"Address1\": \"Main str. 1\",\r\n  \"City\": \"New York\",\r\n  \"State\": \"NY\",\r\n  \"Zip\": \"123456\",\r\n  \"CountryIso\": \"US\",\r\n  \"ExpMonth\": \"11\",\r\n  \"ExpYear\": \"2022\",\r\n  \"PhoneNumber\": \"5105551212\",\r\n  \"Email\": \"test@test.com\",\r\n  \"IsTest\": true,\r\n  \"ClosingDate\": \"1704067200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						},
+						"description": "## Generate Card Request\n\nThis request allows you to create a new virtual card. You can specify details such as the program ID, card limit, cardholder information, and whether the card is in test mode.\n\n### Request Details:\n\n- **Method**: POST\n    \n- **Endpoint**: `/cards`\n    \n\n### Headers:\n\nAuthorization: Bearer {{api_key}}\n\nContent-Type: application/json\n\nIdempotency-Key: UniqueValue\n\n### Idempotency Key\n\nThe `Idempotency-Key` is used to ensure that the operation is only executed once, even if the request is repeated due to network issues or other reasons. The key must be unique for each operation and can be generated using various functions in popular programming languages:\n\n- **Ruby**: `SecureRandom.uuid`\n    \n- **PHP**: `uniqid`\n    \n- **Java**: `UUID.randomUUID`\n    \n- **Python**: `uuid` (Python 2, Python 3)\n    \n- **C#**: `Guid.NewGuid`\n    \n- **Node**: `uuid`"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"ProgramID\": 139,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": false,\r\n  \"FirstName\": \"John\",\r\n  \"LastName\": \"Miller\",\r\n  \"Address1\": \"Main str. 1\",\r\n  \"City\": \"New York\",\r\n  \"State\": \"NY\",\r\n  \"Zip\": \"123456\",\r\n  \"CountryIso\": \"US\",\r\n  \"ExpMonth\": \"11\",\r\n  \"ExpYear\": \"2022\",\r\n  \"PhoneNumber\": \"5105551212\",\r\n  \"Email\": \"email@email.com\",\r\n  \"IsTest\": true,\r\n  \"ClosingDate\": \"1704067200\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true,\n        \"CardID\": 90\n    }\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"ProgramID\": 105,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": false,\r\n  \"FirstName\": \"John\",\r\n  \"LastName\": \"Miller\",\r\n  \"Address1\": \"Main str. 1\",\r\n  \"City\": \"New York\",\r\n  \"State\": \"NY\",\r\n  \"Zip\": \"123456\",\r\n  \"CountryIso\": \"US\",\r\n  \"ExpMonth\": \"11\",\r\n  \"ExpYear\": \"2022\",\r\n  \"PhoneNumber\": \"5105551212\",\r\n  \"Email\": \"email@email.com\",\r\n  \"IsTest\": true,\r\n  \"ClosingDate\": \"1704067200\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 1,\n    \"Good\": false,\n    \"ErrorMessage\": \"Requested BIN is not accessible for your account. You can contact us via Telegram to request BIN opening.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Card and Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ProgramID\": 139,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": true, // option #2\r\n  \"IsTest\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						},
+						"description": "## Generate Card Request\n\nThis request allows you to create a new virtual card. You can specify details such as the program ID, card limit, cardholder information, and whether the card is in test mode.\n\n## Address Generate\n\nIn body request when `\"AddressGenerate\": true`, you do not need to post all data, api-card.com will generate data for you.\n\nWhen `\"AddressGenerate\": false`, you will have to post data by yourself.\n\n### Auto-Generated Info\n\n| Field           | Description                  | Notes            |\n|-----------------|------------------------------|------------------|\n| `\"FirstName\"`   | First Name                   | Auto-generated   |\n| `\"LastName\"`    | Last Name                    | Auto-generated   |\n| `\"Address1\"`    | Primary Address Line         | Auto-generated   |\n| `\"City\"`        | City                         | Auto-generated   |\n| `\"State\"`       | State                        | Auto-generated   |\n| `\"Zip\"`         | Zip Code                     | Auto-generated   |\n| `\"CountryIso\"`  | Country ISO Code             | Always \"US\"      |\n| `\"ExpMonth\"`    | Expiration Month             | Auto-generated   |\n| `\"ExpYear\"`     | Expiration Year              | Auto-generated   |\n| `\"PhoneNumber\"` | Phone Number                 | Auto-generated   |\n| `\"Email\"`       | Email Address                | Auto-generated   |\n"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"ProgramID\": 139,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": true, // Here we remove all info that we want to be autogenerated\r\n  \"IsTest\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true,\n        \"CardID\": 91\n    }\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"ProgramID\": 105,\r\n  \"Limit\": 1,\r\n  \"AddressGenerate\": true, // Here we remove all info that we want to be autogenerated\r\n  \"IsTest\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 1,\n    \"Good\": false,\n    \"ErrorMessage\": \"Requested BIN is not accessible for your account. You can contact us via Telegram to request BIN opening.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Card Address and Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Type\": \"nameaddress\",\r\n  \"FirstName\": \"John\",\r\n  \"LastName\": \"Doe\",\r\n  \"Address1\": \"123 Main St\",\r\n  \"City\": \"Springfield\",\r\n  \"State\": \"IL\",\r\n  \"Country\": \"US\",\r\n  \"Zip\": \"62704\",\r\n  \"PhoneNumber\": \"2175551212\",\r\n  \"Email\": \"johndoe@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}"
+							]
+						},
+						"description": "Updates the name and address for the specified card."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Type\": \"nameaddress\",\r\n  \"FirstName\": \"John\",\r\n  \"LastName\": \"Doe\",\r\n  \"Address1\": \"123 Main St\",\r\n  \"City\": \"Springfield\",\r\n  \"State\": \"IL\",\r\n  \"Country\": \"US\",\r\n  \"Zip\": \"62704\",\r\n  \"PhoneNumber\": \"2175551212\",\r\n  \"Email\": \"johndoe@example.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Card Limit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Type\": \"limit\",\r\n  \"Limit\": 5000.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}"
+							]
+						},
+						"description": "Sets a new spending limit for the specified card"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Type\": \"limit\",\r\n  \"Limit\": 5000.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Card Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Type\": \"status\",\r\n  \"Status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}"
+							]
+						},
+						"description": "Disables the specified card."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Type\": \"status\",\r\n  \"Status\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 20:27:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be0b80ef847c95e-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Card Closing Date",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "UniqueValue",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Type\": \"extend\",\r\n  \"ClosingDate\": \"1726179742\" // timestamp (new closure date string)\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}"
+							]
+						},
+						"description": "Sets new closing date for existing card"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue12",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Type\": \"extend\",\r\n  \"ClosingDate\": \"1726179742\" // timestamp (new closure date string)\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 10 Sep 2024 23:53:50 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "x-inertia"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=15768000"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=Bi4TPv6saCJvc5J65uCcyhGqQ%2FWkDihob204pF%2FXaGawKbrTpFj6hNLR3HlBGnI2V%2FN%2B1RFHwrYCwU838bSAuXjZEgNfoBdinGXHJc%2BjTkpAXFYQQWXxb05H0mIttfk%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8c1356f6cb0fc92a-IAD"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": {\n        \"IsApproved\": true\n    }\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Idempotency-Key",
+										"value": "UniqueValue123",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Type\": \"extend\",\r\n  \"ClosingDate\": \"1726179742\" // timestamp (new closure date string)\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 10 Sep 2024 23:54:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "x-inertia"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=XExCq5nRNRUVnUcJOV8jnqbJ23Xlmh2QnDFpGayaw6BgaWgkP%2BXhgKMYXgP873dL7apil3Kf8Za4nWhdHkqX6wq8s8JCemHIycYzTfBfyBd2S9Hwg4Weu1LlKBm8Mig%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8c135884dae05aed-IAD"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 1,\n    \"Good\": false,\n    \"ErrorMessage\": \"Cant update card data at this time. Try again later or contact support.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains the essential endpoints for managing virtual cards using the `api-card.com` API. It allows users to securely handle various card operations, including creating, retrieving, updating, and deactivating virtual cards.\n\n### 🔑 Key Features:\n\n- **📄 Retrieve All Cards**: Fetch a list of all virtual cards associated with your account.  \n    **Endpoint**: `GET /cards`\n    \n- **🔍 Get Card Details**: Retrieve detailed information about a specific card by its ID.  \n    **Endpoint**: `GET /cards/{card_id}`\n    \n- **➕ Create a New Card**: Generate a new virtual card by providing necessary details like cardholder information, limit, and expiration.  \n    **Endpoint**: `POST /cards`\n    \n- **🔄 Update Card Status**: Change the status of a card, such as activating or deactivating it.  \n    **Endpoint**: `PUT /cards/{card_id}`\n    \n- **✏️ Modify Card Information**: Update specific card details, including the cardholder's name, address, and spending limits.  \n    **Endpoint**: `PUT /cards/{card_id}`\n    \n- **🗓️ Card Expiration Management**: Extend or modify the expiration date of a card.  \n    **Endpoint**: `PUT /cards/{card_id}`"
+		},
+		{
+			"name": "📂 Transactions",
+			"item": [
+				{
+					"name": "List Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction).to.have.property('id');",
+									"        pm.expect(transaction).to.have.property('card_id');",
+									"        pm.expect(transaction).to.have.property('amount');",
+									"        pm.expect(transaction).to.have.property('tx_date_time_utc');",
+									"        pm.expect(transaction).to.have.property('is_temp');",
+									"        pm.expect(transaction).to.have.property('type_enum');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Result array is present and contains expected number of elements\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('array');",
+									"    pm.expect(responseData.Result).to.have.lengthOf(1);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Transaction date is in a valid date format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction.tx_date_time_utc).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/);",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Ensure the response includes the MetaData object with expected properties\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.MetaData).to.exist;",
+									"    pm.expect(responseData.MetaData).to.have.property('current_page');",
+									"    pm.expect(responseData.MetaData).to.have.property('from');",
+									"    pm.expect(responseData.MetaData).to.have.property('per_page');",
+									"    pm.expect(responseData.MetaData).to.have.property('to');",
+									"    pm.expect(responseData.MetaData).to.have.property('total');",
+									"    pm.expect(responseData.MetaData).to.have.property('total_pages');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/transactions",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							]
+						},
+						"description": "This request retrieves a list of all transactions associated with your account. It supports pagination, sorting, and searching by transaction properties such as merchant name, response status, and transaction date.\n\nTo use this request:  \nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nThe response will return a list of all transactions related to your account."
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/transactions",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": [\n        {\n            \"id\": 357,\n            \"card_id\": 90,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T19:00:05Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"close\"\n        },\n        {\n            \"id\": 356,\n            \"card_id\": 90,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T19:00:05Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"withdrawal\"\n        },\n        {\n            \"id\": 354,\n            \"card_id\": 91,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T18:58:48Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"open\"\n        },\n        {\n            \"id\": 355,\n            \"card_id\": 91,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T18:58:48Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"deposit\"\n        },\n        {\n            \"id\": 353,\n            \"card_id\": 90,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T18:48:38Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"deposit\"\n        },\n        {\n            \"id\": 352,\n            \"card_id\": 90,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T18:48:38Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"open\"\n        },\n        {\n            \"id\": 343,\n            \"card_id\": 88,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T03:00:06Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"close\"\n        },\n        {\n            \"id\": 342,\n            \"card_id\": 88,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T03:00:06Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"withdrawal\"\n        },\n        {\n            \"id\": 338,\n            \"card_id\": 88,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T02:23:41Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"open\"\n        },\n        {\n            \"id\": 339,\n            \"card_id\": 88,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T02:23:41Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"deposit\"\n        }\n    ],\n    \"MetaData\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"per_page\": 15,\n        \"to\": 10,\n        \"total\": 10,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Card Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Result array is present and contains at least one element\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('array').that.is.not.empty;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Amount and id in the Result array are non-negative integers\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction.id).to.be.a('number').and.to.be.at.least(0);",
+									"        pm.expect(transaction.amount).to.be.a('number').and.to.be.at.least(0);",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the tx_date_time_utc field in the Result array is in a valid date-time format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction.tx_date_time_utc).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/, \"Date-time format should be valid\");",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/cards/{{card_id}}/transactions",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"{{card_id}}",
+								"transactions"
+							]
+						},
+						"description": "This request retrieves a list of transactions associated with a specific virtual card.\n\nTo use this request:  \nReplace `{{card_id}}` in the URL with the actual card ID you want to retrieve transactions for.\n\nFor example: to get transactions for the card with ID `88`, set the URL to `https://api-card.com/api/v1/cards/88/transactions`.\n\nSend the request, and it will return the transactions associated with that card.\n\nMake sure your `api_key` is included in the Authorization header.\n\n## Query Parameters\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **per_page** (OPTIONAL) | `int` | Number of records per page |\n| **search** (OPTIONAL) | `string` | Search by properties ('merchant', 'response', 'local_currency', 'country'). |\n| **tx_date_time_utc_from** (OPTIONAL) | `datetime` | Starting transaction date time. |\n| **tx_date_time_utc_to** (OPTIONAL) | `datetime` | Ending transaction date time. |\n| **start_index** (OPTIONAL) | `int` | Start index of transaction offset. |\n| **count** (OPTIONAL) | `int` | Get counted amount of records. |\n\n## Request Examples\n\n``` bash\nhttps://api-card.com/api/v1/cards/{{card_id}}/transactions?search=GOOGLE&start_index=0&count=3&sort_by=tx_date_time_utc&limit=20&per_page=5\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}/transactions",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}",
+										"transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": true,\n    \"Result\": [\n        {\n            \"id\": 344,\n            \"card_id\": 88,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T03:00:06Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"close\"\n        },\n        {\n            \"id\": 343,\n            \"card_id\": 88,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T03:00:06Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"withdrawal\"\n        },\n        {\n            \"id\": 342,\n            \"card_id\": 88,\n            \"amount\": 24.00,\n            \"local_amount\": 24.00,\n            \"local_currency\": \"USD\",\n            \"merchant\": \"OPENAI *CHATGPT SUBSCR OPENAI *CHATGPT SUBSCR +14158799686 CAUS\",\n            \"country\": \"USA\",\n            \"tx_date_time_utc\": \"2024-09-04T02:25:18Z\",\n            \"response\": \"approved\",\n            \"response_text\": \"Approved\",\n            \"is_temp\": true,\n            \"type_enum\": \"Authorization\"\n        },\n        {\n            \"id\": 339,\n            \"card_id\": 88,\n            \"amount\": 1,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T02:23:41Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"deposit\"\n        },\n        {\n            \"id\": 338,\n            \"card_id\": 88,\n            \"amount\": 0,\n            \"local_amount\": null,\n            \"local_currency\": null,\n            \"merchant\": null,\n            \"country\": null,\n            \"tx_date_time_utc\": \"2024-09-04T02:23:41Z\",\n            \"response\": null,\n            \"response_text\": null,\n            \"is_temp\": false,\n            \"type_enum\": \"open\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Example Failed Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/cards/{{card_id}}/transactions",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cards",
+										"{{card_id}}",
+										"transactions"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 1,\n    \"Good\": false,\n    \"ErrorMessage\": \"Card not found or no permission\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Internal Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.be.an('array');",
+									"",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction).to.have.property('id');",
+									"        pm.expect(transaction).to.have.property('amount');",
+									"        pm.expect(transaction).to.have.property('type');",
+									"        pm.expect(transaction).to.have.property('comment');",
+									"        pm.expect(transaction).to.have.property('created_at');",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Result array is present and contains expected number of elements\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.Result).to.exist.and.to.be.an('array');",
+									"    pm.expect(responseData.Result).to.have.lengthOf(1);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Response body should be a valid JSON object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"});",
+									"",
+									"pm.test(\"The MetaData object should exist\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.MetaData).to.exist;",
+									"});",
+									"",
+									"pm.test(\"Created_at date format should be valid\", function () {",
+									"    const responseData = pm.response.json();",
+									"    responseData.Result.forEach(function(transaction) {",
+									"        pm.expect(transaction.created_at).to.match(/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$/);",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Metadata contains the expected properties\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.MetaData).to.be.an('object');",
+									"    pm.expect(responseData.MetaData).to.include.all.keys('current_page', 'from', 'per_page', 'to', 'total', 'total_pages');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-card.com/api/v1/transactions/internal",
+							"protocol": "https",
+							"host": [
+								"api-card",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"internal"
+							]
+						},
+						"description": "This request retrieves a list of internal transactions related to account management activities such as card limit updates, balance replenishments, and card package purchases.\n\nTo use this request:  \nSimply send the request as is, with your `api_key` included in the Authorization header.\n\nThe response will return a list of internal transactions associated with your account.\n\n## Query Parameters\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **per_page** (OPTIONAL) | `int` | Number of records per page |\n| **search** (OPTIONAL) | `string` | Search by properties ('type', 'comment'). |\n| **created_at_from** (OPTIONAL) | `datetime` | Starting transaction date time. |\n| **created_at_to** (OPTIONAL) | `datetime` | Ending transaction date time. |\n| **start_index** (OPTIONAL) | `int` | Start index of transaction offset. |\n| **count** (OPTIONAL) | `int` | Get counted amount of records. |\n\n## Types Definition\n\n| Type | Description |\n| --- | --- |\n| **balance_replenish_manual** | Manual top up account by manager |\n| **balance_replenish_payment** | Top up account with crypto payment automated |\n| **update_card_limit_charge** | Charging when creating a new card or increasing existing deposit limit more than the previous limit amount |\n| **update_card_limit_top_up** | Top up an account balance with the difference if new card deposit amount is set for less than the previous |\n| **cards_package_purchased** | Card package purchased |\n| **card_issued** | Card is issued |\n| **balance_return_after_card_closure** | Top up account balance with remaining card balance amount when the card was closed |"
+					},
+					"response": [
+						{
+							"name": "Example Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-card.com/api/v1/transactions/internal",
+									"protocol": "https",
+									"host": [
+										"api-card",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"internal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Sep 2024 18:34:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8be013fc78da801d-IAD"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Status\": 0,\n    \"Good\": 1,\n    \"Result\": [\n        {\n            \"id\": 329,\n            \"amount\": 0,\n            \"type\": \"card_issued\",\n            \"comment\": \"Issued card #91\",\n            \"created_at\": \"2024-09-04T18:58:48Z\"\n        },\n        {\n            \"id\": 328,\n            \"amount\": 0,\n            \"type\": \"card_issued\",\n            \"comment\": \"Issued card #90\",\n            \"created_at\": \"2024-09-04T18:48:38Z\"\n        },\n        {\n            \"id\": 320,\n            \"amount\": 0,\n            \"type\": \"card_issued\",\n            \"comment\": \"Issued card #88\",\n            \"created_at\": \"2024-09-04T02:23:41Z\"\n        }\n    ],\n    \"MetaData\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"per_page\": 15,\n        \"to\": 3,\n        \"total\": 3,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints for managing card transactions and internal operations.\n\n### 🔑 Key Features:\n\n- **📄 Retrieve All Transactions**: Get a list of all transactions associated with your account.  \n    **Endpoint**: `GET /transactions`\n    \n- **💳 Retrieve Card Transactions**: Get transactions related to specific cards.  \n    **Endpoint**: `GET /transactions/cards`\n    \n- **🔄 Retrieve Internal Transactions**: Get a list of all internal transactions.  \n    **Endpoint**: `GET /transactions/internal`"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "card_id",
+			"value": "{{card_id}}"
+		},
+		{
+			"key": "api_key",
+			"value": "{{api_key}}",
+			"type": "string"
+		}
+	]
+}
